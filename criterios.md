@@ -1,7 +1,7 @@
 # Entrega 01 - Telas da aplicação
 
 ## Critérios Funcionais
-- Cadastro de Máquinas: A aplicação deve permitir o cadastro completo de máquinas, incluindo nome, tipo, modelo, data de fabricação, número de série, localização, histórico de manutenção e upload de imagens.
+- Cadastro de Máquinas: A aplicação deve permitir o cadastro completo de máquinas, incluindo nome, tipo, modelo, data de fabricação, número de série, localização e upload de imagens.
 - Visualização Detalha de Máquinas: A aplicação deve exibir informações detalhadas de cada máquina, com histórico de manutenções, informações sobre peças e materiais utilizados e a possibilidade de visualizar imagens.
 - Cadastro de Manutenções: A aplicação deve permitir o cadastro de solicitações de manutenção, incluindo descrição do problema, data da solicitação, prioridade, responsável, status da manutenção, upload de arquivos, e a possibilidade de adicionar comentários.
 - Gerenciamento de Status da Manutenção: A aplicação deve permitir a atualização do status da manutenção (pendente, em andamento, concluída, cancelada) com a possibilidade de adicionar comentários e arquivos.
