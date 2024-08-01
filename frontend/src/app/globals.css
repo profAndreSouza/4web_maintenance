@@ -31,3 +31,23 @@ body {
     text-wrap: balance;
   }
 }
+
+@layer components {
+
+  .data-table th {
+    padding: 1rem;
+    text-align: left;
+    background-color: white;
+  }
+
+  .data-table td {
+    padding: 0.75rem;
+  }
+
+  .data-table tr:nth-child(even) {
+    background-color: floralwhite;
+  }
+
+
+
+}
