@@ -1,9 +1,8 @@
 import { Stack } from "expo-router";
+import Index from ".";
 
 export default function RootLayout() {
-    return (
-    <Stack>
-      <Stack.Screen name="index" />
-    </Stack>
+  return (
+    <Index />
   );
 }
