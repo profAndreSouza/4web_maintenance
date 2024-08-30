@@ -14,7 +14,7 @@ export function HomeScreen({ navigation }: { navigation: any }) {
           value={name}
           onChangeText={setName}
         />
-        <Text className="text-xl mb-2">Email</Text>
+        <Text className="text-xl mb-2 text-red-500">Email</Text>
         <TextInput
           className="border border-gray-300 p-3 mb-5 rounded"
           placeholder="Enter your email"

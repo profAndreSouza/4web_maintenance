@@ -1,50 +1,43 @@
-# Welcome to your Expo app 👋
+# Versão Light Mobile - Requisitos e Critérios
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Oferecer uma versão simplificada do sistema para dispositivos móveis, focando em funcionalidades essenciais para o gerenciamento de máquinas e manutenções no campo.
 
-## Get started
+## Requisitos Funcionais:
 
-1. Install dependencies
+### Gerenciamento de Máquinas:
+ - Lista de máquinas com informações básicas (nome, tipo, localização).
+ - Acesso a informações detalhadas de uma máquina (modelo, data de fabricação, número de série).
 
-   ```bash
-   npm install
-   ```
+### Manutenção: 
+ - Visualizar o histórico de manutenções recentes.
+ - Marcar uma máquina como "em manutenção" e adicionar comentários.
 
-2. Start the app
+### Solicitação:
+ - Criar solicitações de manutenção (descrição do problema, prioridade, responsável).
+ - Visualizar o status da manutenção (pendente, em andamento, concluída).
+ - Adicionar comentários e fotos à solicitação.
 
-   ```bash
-    npx expo start
-   ```
+### Registro:
+ - Registrar as peças e materiais utilizados durante a manutenção.
 
-In the output, you'll find options to open the app in a
+### Relatórios:
+ - Visualizar relatórios de manutenções recentes da máquina (data, descrição, status).
+ - Visualizar o estoque de peças disponíveis (nome, quantidade) em um menu simplificado.
+ - Consultar a disponibilidade de peças específicas para uma manutenção.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### Gerenciamento de Equipes:
+ - Visualizar a lista de equipes disponíveis e seus membros.
+ - Verificar a disponibilidade de equipes para uma determinada manutenção.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### Autenticação e Autorização:
+ - Login:
+Autenticação via login e senha.
 
-## Get a fresh project
+## Critérios de Design:
+- Ter design =)
+- Interface amigável e intuitiva: Priorizar navegação simples e fácil de usar.
+- Funcionalidades essenciais: Foco em funcionalidades mais usadas no campo.
+- Minimizar consumo de dados: Otimizar o uso de dados para minimizar o consumo da bateria do dispositivo.
 
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Considerações importantes para a versão light mobile:
+- A versão light deve oferecer uma experiência de usuário otimizada para dispositivos móveis, com foco em usabilidade e performance.
