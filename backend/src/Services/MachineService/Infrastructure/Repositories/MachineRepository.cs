@@ -19,7 +19,7 @@ namespace MachineService.Infrastructure.Repositories
             _context.SaveChanges();
         }
 
-        public Machine GetMachineById(int id)
+        public Machine? GetMachineById(int id)
         {
             return _context.Machines.Find(id);
         }
