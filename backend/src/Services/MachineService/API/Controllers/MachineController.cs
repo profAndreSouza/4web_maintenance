@@ -1,11 +1,12 @@
 using MachineService.Application.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using MachineService.Application.DTOs;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace MachineService.API.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class MachineController : ControllerBase
     {
         private readonly IMachineService _machineService;
@@ -16,20 +17,21 @@ namespace MachineService.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult RegisterMachine([FromBody] MachineDto machineDto)
+        public async Task<IActionResult> RegisterMachine([FromBody] MachineDto machineDto)
         {
-            _machineService.RegisterMachine(machineDto);
-            return Ok();
+            var result = await _machineService.RegisterMachine(machineDto);
+            if (result)
+                return Ok();
+            return BadRequest();
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetMachineDetails(int id)
+        public async Task<IActionResult> GetMachineDetails(int id)
         {
-            var machine = _machineService.GetMachineDetails(id);
-            if (machine == null)
-                return NotFound();
-
-            return Ok(machine);
+            var machine = await _machineService.GetMachineDetails(id);
+            if (machine != null)
+                return Ok(machine);
+            return NotFound();
         }
     }
 }

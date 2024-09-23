@@ -1,10 +1,11 @@
 using MachineService.Domain.Entities;
+using System.Threading.Tasks;
 
 namespace MachineService.Domain.Interfaces
 {
     public interface IMachineRepository
     {
-        void AddMachine(Machine machine);
-        Machine? GetMachineById(int id);
+        Task<bool> AddAsync(Machine machine);
+        Task<Machine> GetByIdAsync(int id);
     }
 }

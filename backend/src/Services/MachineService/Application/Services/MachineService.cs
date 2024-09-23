@@ -2,6 +2,7 @@ using MachineService.Application.DTOs;
 using MachineService.Application.Interfaces;
 using MachineService.Domain.Entities;
 using MachineService.Domain.Interfaces;
+using System.Threading.Tasks;
 
 namespace MachineService.Application.Services
 {
@@ -14,30 +15,27 @@ namespace MachineService.Application.Services
             _machineRepository = machineRepository;
         }
 
-        public void RegisterMachine(MachineDto machineDto)
+        public async Task<bool> RegisterMachine(MachineDto machineDto)
         {
             var machine = new Machine
             {
                 Name = machineDto.Name,
-                Model = machineDto.Model,
-                SerialNumber = machineDto.SerialNumber,
-                Location = machineDto.Location
+                Status = machineDto.Status
             };
 
-            _machineRepository.AddMachine(machine);
+            return await _machineRepository.AddAsync(machine);
         }
 
-        public MachineDto GetMachineDetails(int id)
+        public async Task<MachineDto> GetMachineDetails(int id)
         {
-            var machine = _machineRepository.GetMachineById(id);
+            var machine = await _machineRepository.GetByIdAsync(id);
             if (machine == null) return null;
 
             return new MachineDto
             {
+                Id = machine.Id,
                 Name = machine.Name,
-                Model = machine.Model,
-                SerialNumber = machine.SerialNumber,
-                Location = machine.Location
+                Status = machine.Status
             };
         }
     }

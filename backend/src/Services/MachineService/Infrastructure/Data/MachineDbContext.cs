@@ -5,15 +5,16 @@ namespace MachineService.Infrastructure.Data
 {
     public class MachineDbContext : DbContext
     {
+        public DbSet<Machine> Machines { get; set; }
+
         public MachineDbContext(DbContextOptions<MachineDbContext> options) : base(options)
         {
         }
 
-        public DbSet<Machine> Machines { get; set; }
-
-        public override int SaveChanges()
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            return base.SaveChanges();
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new MachineConfiguration());
         }
     }
 }

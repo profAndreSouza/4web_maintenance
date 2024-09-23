@@ -1,6 +1,8 @@
 using MachineService.Domain.Entities;
 using MachineService.Domain.Interfaces;
 using MachineService.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace MachineService.Infrastructure.Repositories
 {
@@ -13,15 +15,15 @@ namespace MachineService.Infrastructure.Repositories
             _context = context;
         }
 
-        public void AddMachine(Machine machine)
+        public async Task<bool> AddAsync(Machine machine)
         {
             _context.Machines.Add(machine);
-            _context.SaveChanges();
+            return await _context.SaveChangesAsync() > 0;
         }
 
-        public Machine? GetMachineById(int id)
+        public async Task<Machine> GetByIdAsync(int id)
         {
-            return _context.Machines.Find(id);
+            return await _context.Machines.FindAsync(id);
         }
     }
 }

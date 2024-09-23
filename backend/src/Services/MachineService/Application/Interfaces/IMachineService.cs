@@ -1,10 +1,11 @@
 using MachineService.Application.DTOs;
+using System.Threading.Tasks;
 
 namespace MachineService.Application.Interfaces
 {
     public interface IMachineService
     {
-        void RegisterMachine(MachineDto machineDto);
-        MachineDto GetMachineDetails(int id);
+        Task<bool> RegisterMachine(MachineDto machineDto);
+        Task<MachineDto> GetMachineDetails(int id);
     }
 }
