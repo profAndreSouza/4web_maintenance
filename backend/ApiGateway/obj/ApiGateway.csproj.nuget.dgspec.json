@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\projects\\SENAI\\4WEB - Manutencao\\backend\\ApiGateway\\ApiGateway.csproj": {}
+    "C:\\projects\\SENAI\\AuthMicroservice\\ApiGateway\\ApiGateway.csproj": {}
   },
   "projects": {
-    "C:\\projects\\SENAI\\4WEB - Manutencao\\backend\\ApiGateway\\ApiGateway.csproj": {
+    "C:\\projects\\SENAI\\AuthMicroservice\\ApiGateway\\ApiGateway.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\projects\\SENAI\\4WEB - Manutencao\\backend\\ApiGateway\\ApiGateway.csproj",
+        "projectUniqueName": "C:\\projects\\SENAI\\AuthMicroservice\\ApiGateway\\ApiGateway.csproj",
         "projectName": "ApiGateway",
-        "projectPath": "C:\\projects\\SENAI\\4WEB - Manutencao\\backend\\ApiGateway\\ApiGateway.csproj",
+        "projectPath": "C:\\projects\\SENAI\\AuthMicroservice\\ApiGateway\\ApiGateway.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\projects\\SENAI\\4WEB - Manutencao\\backend\\ApiGateway\\obj\\",
+        "outputPath": "C:\\projects\\SENAI\\AuthMicroservice\\ApiGateway\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -46,13 +46,21 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "MMLib.SwaggerForOcelot": {
+              "target": "Package",
+              "version": "[8.3.2, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[8.0.8, )"
             },
             "Ocelot": {
               "target": "Package",
-              "version": "[23.3.3, )"
+              "version": "[23.3.6, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

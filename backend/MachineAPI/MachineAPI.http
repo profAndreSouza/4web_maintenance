@@ -1,0 +1,6 @@
+@MachineAPI_HostAddress = http://localhost:5178
+
+GET {{MachineAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

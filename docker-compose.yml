@@ -1,0 +1,79 @@
+services:
+  db:
+    image: postgres
+    hostname: postgres
+    environment:
+      POSTGRES_USER: authapi
+      POSTGRES_PASSWORD: authapi
+      POSTGRES_DB: authapi
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - gateway_network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: adminpassword
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    networks:
+      - gateway_network
+
+  frontend_api:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    stdin_open: true
+    tty: true
+
+  apigateway:
+    build:
+      context: .
+      dockerfile: ./backend/ApiGateway/Dockerfile
+    ports:
+      - "3001:8080"
+    depends_on:
+      - userapi
+      - machineapi
+    networks:
+      - gateway_network
+
+  userapi:
+    build:
+      context: .
+      dockerfile: ./backend/UserAPI/src/Infrastructure/Docker/Dockerfile
+    ports:
+      - "3002:8080"
+    depends_on:
+      - db
+    networks:
+      - gateway_network
+
+  machineapi:
+    build:
+      context: .
+      dockerfile: ./backend/MachineAPI/src/Infrastructure/Docker/Dockerfile
+    ports:
+      - "3003:8080"
+    depends_on:
+      - db
+    networks:
+      - gateway_network
+
+volumes:
+  db_data:
+
+networks:
+  gateway_network:
+    driver: bridge

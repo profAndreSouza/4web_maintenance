@@ -43,8 +43,9 @@ export default function Home() {
           <div className="max-h-svh overflow-y-auto">
 
             <div className="grid grid-cols-4 gap-4 p-6">
-              {cards.map((props) => (
-                <Card color={props.color}
+              {cards.map((props, index) => (
+                <Card key={index} 
+                    color={props.color}
                     qty={props.qty}
                     text={props.text}
                     icon={props.icon}
