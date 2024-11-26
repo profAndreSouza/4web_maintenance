@@ -25,6 +25,18 @@ services:
     networks:
       - gateway_network
 
+  frontend_api:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    stdin_open: true
+    tty: true
+
   apigateway:
     build:
       context: .
