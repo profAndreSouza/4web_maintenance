@@ -5,9 +5,18 @@ const BASE_URL = 'http://localhost:3002/api/User';
 
 class UserService {
 
-    static async createUser(userData: User): Promise<User> {
+    static async create(userData: User): Promise<User> {
         try {
             const response = await axios.post(BASE_URL, userData);
+            return response.data;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    static async getAll(): Promise<User[]> {
+        try {
+            const response = await axios.get(BASE_URL);
             return response.data;
         } catch (error) {
             throw error;

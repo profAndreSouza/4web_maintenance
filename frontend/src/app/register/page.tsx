@@ -34,7 +34,7 @@ const RegisterPage = () => {
       password: password
     }
 
-    UserService.createUser(newUser)
+    UserService.create(newUser)
       .then((createdUser) => {
         alert("Usuário criado com sucesso");
         router.push('/login');
