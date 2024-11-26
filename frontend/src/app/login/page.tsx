@@ -44,11 +44,24 @@ const LoginPage = () => {
               </div>
             </form>
     
+
             <div className="mt-4 text-center">
-              <a href="#" className="text-sm text-blue-600 hover:underline">
-                Esqueceu sua senha?
-              </a>
+                <a
+                    href="/forgot-password"
+                    className="text-sm text-blue-600 hover:underline"
+                >
+                    Esqueceu sua senha?
+                </a>
             </div>
+
+        <div className="mt-4 text-center">
+          <a
+            href="/register"
+            className="text-sm text-blue-600 hover:underline"
+          >
+            Não tem uma conta? Registre-se aqui
+          </a>
+        </div>
           </div>
         </div>
     );

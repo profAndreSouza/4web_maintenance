@@ -2,13 +2,13 @@ import { FaBuilding } from "react-icons/fa";
 import { GrNotes } from "react-icons/gr";
 import { IoMdCheckboxOutline } from "react-icons/io";
 import { MdForklift } from "react-icons/md";
-import { Footer } from "./components/footer";
-import { Aside } from "./components/aside";
-import { Card } from "./components/card";
-import { DataTable as MyDataTable } from "./components/datatable";
+import { Footer } from "../components/footer";
+import { Aside } from "../components/aside";
+import { Card } from "../components/card";
+import { DataTable as MyDataTable } from "../components/datatable";
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { MainChart } from "./components/mainchart";
+import { MainChart } from "../components/mainchart";
         
 
 
