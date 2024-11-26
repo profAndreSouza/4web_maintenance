@@ -15,8 +15,20 @@ class UserService {
     }
 
     static async getAll(): Promise<User[]> {
+        const token = localStorage.getItem('token');
+        if (!token)
+            throw "Acesso não autorizado!";
+
         try {
-            const response = await axios.get(BASE_URL);
+            const response = await axios.get(
+                BASE_URL,
+                {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                }
+            );
             return response.data;
         } catch (error) {
             throw error;

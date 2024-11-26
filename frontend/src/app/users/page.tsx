@@ -19,7 +19,8 @@ const UsersList: React.FC = () => {
                 const userData = await UserService.getAll();
                 setUsers(userData);
             } catch (error: any) {
-                if (error.response?.status === 401) {
+                console.log(error);
+                if (error === "Acesso não autorizado!") {
                     setError("Acesso não autorizado. Redirecionando para o login...");
                     router.push('/login');
                 }
@@ -30,6 +31,10 @@ const UsersList: React.FC = () => {
         };
         fetchUsers();
     }, []);
+
+    
+    if (loading)
+        return <div className='h-screen'>Carregando...</div>
 
   return (
 
@@ -50,7 +55,6 @@ const UsersList: React.FC = () => {
                     
                 <h1 className="text-2xl font-bold mb-4">Lista de Usuários</h1>
                 
-                {loading && <div className="text-2xl font-bold text-white">Carregando...</div>}
                 {users.length > 0 ? (
                     <table className="table-auto w-full border-collapse border border-gray-300">
                     <thead>

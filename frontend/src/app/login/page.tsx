@@ -1,23 +1,62 @@
-import React from "react";
+"use client"
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { UserLogin } from "@/types/UserLogin";
+import AuthService from "@/services/AuthService";
 
 const LoginPage = () => {
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+
+  const router = useRouter();
+
+  const handleLogin = (e: React.FormEvent) => {
+
+    e.preventDefault();
+    setError(null);
+
+    const loginData: UserLogin = {
+      username: username,
+      password: password
+    }
+
+    AuthService.login(loginData)
+      .then((token) => {
+        setError("Usuário Autenticado com sucesso");
+        router.push('/');
+      })
+      .catch((error) => {
+        const response = error.response ? JSON.stringify(error.response.data, null, 4) : "Erro desconhecido";
+        console.log(error);
+        setError(response);
+      });
+    
+
+  }
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
           <div className="w-full max-w-sm p-8 space-y-4 bg-white rounded-lg shadow-md">
             <h2 className="text-2xl font-bold text-center text-gray-700">Entrar</h2>
     
-            <form className="space-y-4">
+            {error && <div className="text-red-500">{error}</div>}
+
+            <form className="space-y-4" method="post" onSubmit={handleLogin}>
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-600">
                   E-mail
                 </label>
                 <input
-                  type="email"
-                  id="email"
-                  name="email"
+                  type="text"
+                  id="username"
+                  name="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                   className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Seu e-mail"
+                  placeholder="Nome de usuário"
+                  required
                 />
               </div>
     
@@ -29,6 +68,8 @@ const LoginPage = () => {
                   type="password"
                   id="password"
                   name="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Sua senha"
                 />
