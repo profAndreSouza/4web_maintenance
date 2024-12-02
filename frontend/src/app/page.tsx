@@ -1,86 +1,67 @@
-import { FaBuilding } from "react-icons/fa";
-import { GrNotes } from "react-icons/gr";
-import { IoMdCheckboxOutline } from "react-icons/io";
-import { MdForklift } from "react-icons/md";
-import { Footer } from "../components/footer";
-import { Aside } from "../components/aside";
-import { Card } from "../components/card";
-import { DataTable as MyDataTable } from "../components/datatable";
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-import { MainChart } from "../components/mainchart";
-        
+"use client";
 
+import { Aside } from "@/components/layout/aside";
+import NotificationList from "@/components/dashboard/NotificationList";
+import ShortcutButton from "@/components/dashboard/ShortcutButton";
+import StatsCard from "@/components/dashboard/StatsCard";
+import { Footer } from "@/components/layout/footer";
+import React from "react";
+import { AiOutlinePlus, AiOutlineSetting, AiOutlineWarning } from "react-icons/ai";
+import Layout from "@/components/layout/layout";
 
-export default function Home() {
-
-
-  const cards = [
-    {color: "bg-orange-200", qty:"100", text:"Ambientes", icon:<FaBuilding size={48} />},
-    {color: "bg-blue-200", qty:"100", text:"Equipamentos", icon:<MdForklift size={48} />},
-    {color: "bg-red-200", qty:"100", text:"O.S. Abertas", icon:<GrNotes size={48} />},
-    {color: "bg-green-200", qty:"100", text:"O.S. Concluídas", icon:<IoMdCheckboxOutline size={48} />},
+const DashboardPage: React.FC = () => {
+  const stats = [
+    { title: "Máquinas Registradas", value: 150 },
+    { title: "Manutenções Pendentes", value: 12 },
+    { title: "Peças em Estoque", value: 45 },
   ];
 
-  const requisitions = [
-    {place: "Sala 01", equipment:"Projetor", requested:"27-jul", completed:"-"},
-    {place: "Sala 01", equipment:"Lousa", requested:"27-jul", completed:"27-jul"},
-    {place: "Sala 02", equipment:"Mesa", requested:"28-jul", completed:"-"},
+  const shortcuts = [
+    { label: "Adicionar Máquina", onClick: () => alert("Adicionar Máquina"), icon: <AiOutlinePlus /> },
+    { label: "Criar Solicitação de Manutenção", onClick: () => alert("Criar Solicitação"), icon: <AiOutlineSetting /> },
   ];
-    
+
+  const notifications = [
+    { id: "1", message: "Manutenção atrasada na máquina #123", type: "warning" },
+    { id: "2", message: "Nova máquina registrada: Máquina #456", type: "info" },
+    { id: "3", message: "Peças críticas no estoque!", type: "error" },
+  ];
+
   return (
-    <div className="h-screen flex flex-col">
-      <div className="flex-1 flex h-4/5">
-        
-        <Aside />
+    <Layout aside={<Aside />} footer={<Footer />}>
+      
+      
+      <div className="min-h-screen bg-gray-100 p-6">
+        <h1 className="text-2xl font-bold text-gray-800 mb-6">Dashboard</h1>
 
-        <main className="flex-1 flex flex-col">
+        {/* Estatísticas */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+          {stats.map((stat, index) => (
+            <StatsCard key={index} title={stat.title} value={stat.value} />
+          ))}
+        </div>
 
-          <h1 className="text-4xl font-bold uppercase w-full
-           bg-white/40 p-6 text-center">
-            Sistema de Gestão de Manutenção</h1>
+        {/* Atalhos */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+          {shortcuts.map((shortcut, index) => (
+            <ShortcutButton
+              key={index}
+              label={shortcut.label}
+              onClick={shortcut.onClick}
+              icon={shortcut.icon}
+            />
+          ))}
+        </div>
 
-          <div className="max-h-svh overflow-y-auto">
-
-            <div className="grid grid-cols-4 gap-4 p-6">
-              {cards.map((props, index) => (
-                <Card key={index} 
-                    color={props.color}
-                    qty={props.qty}
-                    text={props.text}
-                    icon={props.icon}
-                />
-              ))}
-            </div>
-
-            
-            <div className="flex gap-2 p-6 pt-0">
-
-            <div className="p-0  rounded-xl w-1/3">
-              <MainChart />
-            </div>
-            <div className="m-6 mt-0 p-6 bg-white/40 rounded-xl flex-1">
-              {/* <DataTable /> */}
-              <DataTable value={requisitions} paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]} tableStyle={{ minWidth: '50rem' }}>
-                  <Column field="place" header="Ambiente" style={{ width: '25%' }}></Column>
-                  <Column field="equipment" header="Equipamento" style={{ width: '25%' }}></Column>
-                  <Column field="requested" header="Solicitado em" style={{ width: '25%' }}></Column>
-                  <Column field="completed" header="Atendido em" style={{ width: '25%' }}></Column>
-              </DataTable>
-
-            </div>
-
-            </div>
-
-          </div>
-
-
-        </main>
-
+        {/* Notificações */}
+        <NotificationList notifications={notifications} />
       </div>
 
-      <Footer />
-
-    </div>
+    </Layout>
+   
   );
-}
+};
+
+export default DashboardPage;
+
+

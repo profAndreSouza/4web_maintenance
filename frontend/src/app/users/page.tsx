@@ -1,8 +1,8 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import { User } from '@/types/User';
-import { Aside } from '@/components/aside';
-import { Footer } from '@/components/footer';
+import { Aside } from '@/components/layout/aside';
+import { Footer } from '@/components/layout/footer';
 import UserService from '@/services/UserService';
 import { useRouter } from 'next/navigation';
 
