@@ -23,10 +23,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     const loadUser = async () => {
-      const storedUser = await SecureStore.getItemAsync('user');
-      if (storedUser) {
-        setUser(JSON.parse(storedUser));
-      }
+      // const storedUser = await SecureStore.getItemAsync('user');
+      // if (storedUser) {
+      //   setUser(JSON.parse(storedUser));
+      // }
     };
     loadUser();
   }, []);
