@@ -1,15 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
-
-// Dados fictícios para exibição
-const machines = [
-  { id: '1', name: 'Máquina A', type: 'Tipo 1', location: 'Setor 1' },
-  { id: '2', name: 'Máquina B', type: 'Tipo 2', location: 'Setor 2' },
-  { id: '3', name: 'Máquina C', type: 'Tipo 3', location: 'Setor 3' },
-];
+import { machines } from '../services/machines'; // Importando os dados das máquinas
+import { useAuth } from '../contexts/AuthContext';
 
 // Tipos para navegação
 type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
@@ -21,6 +16,8 @@ export const HomeScreen: React.FC = () => {
     navigation.navigate('MachineDetails', { id: machineId });
   };
 
+  const { user } = useAuth();
+
   return (
     <View className="flex-1 bg-gray-100 p-4">
       <Text className="text-2xl font-bold text-gray-800 mb-4">Lista de Máquinas</Text>
@@ -29,9 +26,10 @@ export const HomeScreen: React.FC = () => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <TouchableOpacity
-            className="p-4 bg-white rounded-lg mb-2 shadow"
+            className="p-4 bg-white rounded-lg mb-4 shadow-md"
             onPress={() => handleMachinePress(item.id)}
           >
+            <Text className="text-lg font-semibold text-gray-800">{user}</Text>
             <Text className="text-lg font-semibold text-gray-800">{item.name}</Text>
             <Text className="text-gray-600">{item.type}</Text>
             <Text className="text-gray-600">{item.location}</Text>

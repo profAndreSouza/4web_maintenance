@@ -20,25 +20,26 @@ export const useAuth = () => {
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<any>(null);
-
+  
   useEffect(() => {
     const loadUser = async () => {
       // const storedUser = await SecureStore.getItemAsync('user');
       // if (storedUser) {
       //   setUser(JSON.parse(storedUser));
       // }
+      setUser("Ana Júlia Moura Martins");
     };
     loadUser();
   }, []);
 
   const signIn = async (email: string, password: string) => {
     const authenticatedUser = await login(email, password);
-    setUser(authenticatedUser);
+    // setUser(authenticatedUser);
     await SecureStore.setItemAsync('user', JSON.stringify(authenticatedUser));
   };
 
   const signOut = async () => {
-    setUser(null);
+    // setUser(null);
     await SecureStore.deleteItemAsync('user');
   };
 

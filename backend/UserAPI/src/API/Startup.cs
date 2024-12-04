@@ -32,6 +32,8 @@ public class Startup
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<ITokenService, TokenService>();
 
+        services.AddSingleton<RabbitMQPublisher>();
+
 
         services.AddCors(options =>
         {

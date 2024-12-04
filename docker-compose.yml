@@ -25,6 +25,19 @@ services:
     networks:
       - gateway_network
 
+
+  rabbitmq:
+    image: rabbitmq:management
+    hostname: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672" # Porta para conexões AMQP
+      - "15672:15672" # Porta para a interface de gerenciamento
+    networks:
+      - gateway_network
+
   apigateway:
     build:
       context: .
@@ -34,6 +47,7 @@ services:
     depends_on:
       - userapi
       - machineapi
+      - rabbitmq
     networks:
       - gateway_network
 
@@ -45,6 +59,7 @@ services:
       - "3002:8080"
     depends_on:
       - db
+      - rabbitmq
     networks:
       - gateway_network
 
@@ -56,6 +71,7 @@ services:
       - "3003:8080"
     depends_on:
       - db
+      - rabbitmq
     networks:
       - gateway_network
 
