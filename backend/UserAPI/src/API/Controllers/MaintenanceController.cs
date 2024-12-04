@@ -1,18 +1,19 @@
 using Microsoft.AspNetCore.Mvc;
+using UserAuth.Application.Services;
 
 [ApiController]
 [Route("api/[controller]")]
 public class MaintenanceController : ControllerBase
 {
-    private readonly RabbitMQPublisher _rabbitMqPublisher;
+    private readonly Rabbit _rabbit;
 
-    public MaintenanceController(RabbitMQPublisher rabbitMqPublisher)
+    public MaintenanceController(Rabbit rabbit)
     {
-        _rabbitMqPublisher = rabbitMqPublisher;
+        _rabbit = rabbit;
     }
 
     [HttpGet("publish")]
-    public IActionResult PublishMessage()
+    public async Task<IActionResult> PublishMessageAsync()
     {
         var routingKey = "stock.update";
         var message = new
@@ -22,12 +23,24 @@ public class MaintenanceController : ControllerBase
             {
                 new { partId = "111", quantity = 2 },
                 new { partId = "222", quantity = 1 }
-            }
+            },
+            timestamp = DateTime.UtcNow
         };
+        
+        await _rabbit.InitializeAsync();
+        var publish = _rabbit.PublishMessage(routingKey, message);
 
-        Console.WriteLine("Publising");
-        _ = _rabbitMqPublisher.PublishMessageAsync(routingKey, message);
+        return Ok(new { message = "Message published successfully!", publish = publish });
+    }
 
-        return Ok(new { routingKey = routingKey, success = true, message = "Message published successfully!" });
+    [HttpGet("consume")]
+    public async Task<IActionResult> ConsumeMessageAsync()
+    {
+        var routingKey = "stock.update";
+        
+        await _rabbit.InitializeAsync();
+        var consume =_rabbit.ConsumeMessage(routingKey);
+
+        return Ok(new { message = "Consumer started successfully.", consume = consume });
     }
 }

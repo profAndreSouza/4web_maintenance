@@ -1,13 +1,14 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
 using UserAuth.API.Extensions;
 using UserAuth.Application.Interfaces;
 using UserAuth.Application.Services;
 using UserAuth.Domain.Interfaces;
 using UserAuth.Infrastructure.Data;
-using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using UserAuth.Infrastructure.Repositories;
 
 public class Startup
@@ -32,7 +33,7 @@ public class Startup
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<ITokenService, TokenService>();
 
-        services.AddSingleton<RabbitMQPublisher>();
+        services.AddSingleton<Rabbit>();
 
 
         services.AddCors(options =>
