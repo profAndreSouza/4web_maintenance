@@ -33,13 +33,11 @@ public class MaintenanceController : ControllerBase
         return Ok(new { message = "Message published successfully!", publish = publish });
     }
 
-    [HttpGet("consume")]
+    [HttpGet("consumer")]
     public async Task<IActionResult> ConsumeMessageAsync()
     {
-        var routingKey = "stock.update";
-        
         await _rabbit.InitializeAsync();
-        var consume =_rabbit.ConsumeMessage(routingKey);
+        var consume =_rabbit.ConsumerMessage();
 
         return Ok(new { message = "Consumer started successfully.", consume = consume });
     }
